@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nutricionista.app.dao.AlimentoDAO;
@@ -18,13 +19,16 @@ import java.util.List;
 public class AlimentosActivity extends AppCompatActivity {
 
     private EditText editNomeAlimento;
-    private EditText editCaloriasAlimento;
     private Button btnSalvarAlimento;
+    private Button btnAtualizarAlimento;
+    private Button btnExcluirAlimento;
     private ListView listAlimentos;
 
     private AlimentoDAO alimentoDAO;
     private ArrayAdapter<Alimento> adapter;
     private List<Alimento> alimentos;
+
+    private Alimento alimentoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,9 @@ public class AlimentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alimentos);
 
         editNomeAlimento = findViewById(R.id.editNomeAlimento);
-        editCaloriasAlimento = findViewById(R.id.editCaloriasAlimento);
         btnSalvarAlimento = findViewById(R.id.btnSalvarAlimento);
+        btnAtualizarAlimento = findViewById(R.id.btnAtualizarAlimento);
+        btnExcluirAlimento = findViewById(R.id.btnExcluirAlimento);
         listAlimentos = findViewById(R.id.listAlimentos);
 
         alimentoDAO = new AlimentoDAO();
@@ -48,49 +53,101 @@ public class AlimentosActivity extends AppCompatActivity {
         listAlimentos.setAdapter(adapter);
 
         btnSalvarAlimento.setOnClickListener(v -> salvarAlimento());
+        btnAtualizarAlimento.setOnClickListener(v -> atualizarAlimento());
+        btnExcluirAlimento.setOnClickListener(v -> confirmarExclusao());
+
+        listAlimentos.setOnItemClickListener((parent, view, position, id) -> {
+            alimentoSelecionado = alimentos.get(position);
+            editNomeAlimento.setText(alimentoSelecionado.getNome());
+            Toast.makeText(this, "Alimento selecionado para edição", Toast.LENGTH_SHORT).show();
+        });
 
         carregarAlimentos();
     }
 
     private void salvarAlimento() {
         String nome = editNomeAlimento.getText().toString().trim();
-        String caloriasTexto = editCaloriasAlimento.getText().toString().trim();
 
         if (nome.isEmpty()) {
             editNomeAlimento.setError("Informe o nome do alimento");
+            editNomeAlimento.requestFocus();
             return;
         }
 
-        if (caloriasTexto.isEmpty()) {
-            editCaloriasAlimento.setError("Informe as calorias");
-            return;
-        }
-
-        double calorias;
-
-        try {
-            calorias = Double.parseDouble(caloriasTexto);
-        } catch (NumberFormatException e) {
-            editCaloriasAlimento.setError("Calorias inválidas");
-            return;
-        }
-
-        Alimento alimento = new Alimento(nome, calorias);
+        Alimento alimento = new Alimento(nome);
 
         alimentoDAO.Inserir(alimento, new AlimentoDAO.Callback() {
             @Override
             public void onSucesso() {
                 Toast.makeText(AlimentosActivity.this, "Alimento salvo com sucesso", Toast.LENGTH_SHORT).show();
-
-                editNomeAlimento.setText("");
-                editCaloriasAlimento.setText("");
-
+                limparCampos();
                 carregarAlimentos();
             }
 
             @Override
             public void onErro(String mensagem) {
-                Toast.makeText(AlimentosActivity.this, "Erro: " + mensagem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AlimentosActivity.this, "Erro: " + mensagem, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void atualizarAlimento() {
+        if (alimentoSelecionado == null) {
+            Toast.makeText(this, "Selecione um alimento para atualizar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String nome = editNomeAlimento.getText().toString().trim();
+
+        if (nome.isEmpty()) {
+            editNomeAlimento.setError("Informe o nome do alimento");
+            editNomeAlimento.requestFocus();
+            return;
+        }
+
+        alimentoSelecionado.setNome(nome);
+
+        alimentoDAO.Alterar(alimentoSelecionado, new AlimentoDAO.Callback() {
+            @Override
+            public void onSucesso() {
+                Toast.makeText(AlimentosActivity.this, "Alimento atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                limparCampos();
+                carregarAlimentos();
+            }
+
+            @Override
+            public void onErro(String mensagem) {
+                Toast.makeText(AlimentosActivity.this, "Erro: " + mensagem, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void confirmarExclusao() {
+        if (alimentoSelecionado == null) {
+            Toast.makeText(this, "Selecione um alimento para excluir", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Excluir alimento")
+                .setMessage("Deseja realmente excluir este alimento?")
+                .setPositiveButton("Excluir", (dialog, which) -> excluirAlimento())
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    private void excluirAlimento() {
+        alimentoDAO.Excluir(alimentoSelecionado, new AlimentoDAO.Callback() {
+            @Override
+            public void onSucesso() {
+                Toast.makeText(AlimentosActivity.this, "Alimento excluído com sucesso", Toast.LENGTH_SHORT).show();
+                limparCampos();
+                carregarAlimentos();
+            }
+
+            @Override
+            public void onErro(String mensagem) {
+                Toast.makeText(AlimentosActivity.this, mensagem, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -106,8 +163,13 @@ public class AlimentosActivity extends AppCompatActivity {
 
             @Override
             public void onErro(String mensagem) {
-                Toast.makeText(AlimentosActivity.this, "Erro: " + mensagem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AlimentosActivity.this, "Erro: " + mensagem, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void limparCampos() {
+        editNomeAlimento.setText("");
+        alimentoSelecionado = null;
     }
 }

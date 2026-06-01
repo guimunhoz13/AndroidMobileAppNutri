@@ -11,33 +11,49 @@ import com.nutricionista.app.modelos.Paciente;
 import java.util.List;
 
 public class PacienteAdapter extends ArrayAdapter<Paciente> {
-    private LayoutInflater mInflater;
+
+    private final LayoutInflater inflater;
 
     public PacienteAdapter(Context context, int resource, List<Paciente> dados) {
         super(context, resource, dados);
-        this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.inflater = LayoutInflater.from(context);
     }
 
+    @Override
     public View getView(int posicao, View linha, ViewGroup parent) {
         ViewHolder holder;
+
         if (linha == null) {
-            linha = mInflater.inflate(R.layout.paciente_item, null);
+            linha = inflater.inflate(R.layout.paciente_item, parent, false);
+
             holder = new ViewHolder();
             holder.nome = linha.findViewById(R.id.txtPacienteNome);
             holder.telefone = linha.findViewById(R.id.txtPacienteTelefone);
             holder.objetivo = linha.findViewById(R.id.txtPacienteObjetivo);
+
             linha.setTag(holder);
         } else {
             holder = (ViewHolder) linha.getTag();
         }
+
         Paciente p = getItem(posicao);
-        holder.nome.setText(p.getNome());
-        holder.telefone.setText(p.getTelefone());
-        holder.objetivo.setText(p.getObjetivoNutricional());
+
+        if (p != null) {
+            String nome = p.getNome();
+            String telefone = p.getTelefone();
+            String objetivo = p.getObjetivoNutricional();
+
+            holder.nome.setText(nome == null || nome.trim().isEmpty() ? "Paciente sem nome" : nome);
+            holder.telefone.setText(telefone == null || telefone.trim().isEmpty() ? "Telefone não informado" : telefone);
+            holder.objetivo.setText(objetivo == null || objetivo.trim().isEmpty() ? "Objetivo não informado" : objetivo);
+        }
+
         return linha;
     }
 
     static class ViewHolder {
-        public TextView nome, telefone, objetivo;
+        TextView nome;
+        TextView telefone;
+        TextView objetivo;
     }
 }

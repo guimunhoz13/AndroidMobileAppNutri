@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:padding="8dp">
-    <TextView android:id="@+id/txtTituloPaciente" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="Consultas" android:textSize="17sp"
-        android:textStyle="bold" android:textColor="#2E7D32" android:padding="10dp" android:gravity="center"/>
-    <ListView android:id="@+id/lsvConsultas" android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1"/>
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="+ Nova Consulta" android:onClick="NovaConsultaClique"
-        android:backgroundTint="#2E7D32" android:textColor="#FFFFFF" android:layout_margin="4dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="#F5F7F5">
+
+    <TextView
+        android:id="@+id/txtTituloPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Consultas"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#2E7D32"
+        android:padding="18dp"
+        android:gravity="center" />
+
+    <ListView
+        android:id="@+id/lsvConsultas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="+ NOVA CONSULTA"
+        android:textStyle="bold"
+        android:onClick="NovaConsultaClique"
+        android:backgroundTint="#2E7D32"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_margin="12dp" />
+
 </LinearLayout>

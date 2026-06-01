@@ -1,6 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#F5F7F5">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txtTituloPlano"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plano alimentar"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:gravity="center"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Café da manhã"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtCafeManha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: ovos, pão integral, fruta..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lanche da manhã"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtLancheManha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: iogurte, castanhas..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Almoço"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtAlmoco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: arroz, feijão, frango, salada..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lanche da tarde"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtLancheTarde"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: vitamina, fruta, aveia..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jantar"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtJantar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: legumes, proteína, salada..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ceia"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtCeia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: chá, fruta, iogurte..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Observações"
+            android:textColor="#555555"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtObservacoesPlano"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Restrições, preferências, orientações..."
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="22dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Salvar Plano Alimentar"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:onClick="SalvarPlanoClique"
+            android:backgroundTint="#2E7D32" />
+
+    </LinearLayout>
+</ScrollView>

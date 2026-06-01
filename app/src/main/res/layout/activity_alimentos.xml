@@ -1,6 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#F5F7F5">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#2E7D32"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alimentos"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastro, edição e exclusão"
+                android:textColor="#E8F5E9"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome do alimento"
+                android:textColor="#555555"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editNomeAlimento"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Ex: Arroz integral"
+                android:inputType="textCapWords"
+                android:backgroundTint="#2E7D32"
+                android:layout_marginBottom="14dp" />
+
+            <Button
+                android:id="@+id/btnSalvarAlimento"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="Salvar Alimento"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#2E7D32"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnAtualizarAlimento"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="Atualizar Alimento"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#1565C0"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnExcluirAlimento"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="Excluir Alimento"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#C62828"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toque em um alimento da lista para editar ou excluir"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:layout_marginBottom="10dp" />
+
+            <ListView
+                android:id="@+id/listAlimentos"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="#FFFFFF"
+                android:divider="#E0E0E0"
+                android:dividerHeight="1dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

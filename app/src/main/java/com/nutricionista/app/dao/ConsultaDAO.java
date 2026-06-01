@@ -3,10 +3,12 @@ package com.nutricionista.app.dao;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.nutricionista.app.modelos.Consulta;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConsultaDAO {
 
@@ -24,6 +26,11 @@ public class ConsultaDAO {
 
     public interface CallbackLista {
         void onSucesso(List<Consulta> lista);
+        void onErro(String mensagem);
+    }
+
+    public interface CallbackTotal {
+        void onSucesso(int total);
         void onErro(String mensagem);
     }
 
@@ -58,6 +65,7 @@ public class ConsultaDAO {
                     for (QueryDocumentSnapshot alimento : alimentos) {
                         alimento.getReference().delete();
                     }
+
                     db.collection(COLECAO).document(c.getId()).delete()
                             .addOnSuccessListener(unused -> callback.onSucesso())
                             .addOnFailureListener(e -> callback.onErro(e.getMessage()));
@@ -69,6 +77,7 @@ public class ConsultaDAO {
         db.collection(COLECAO).whereEqualTo("idPaciente", idPaciente).get()
                 .addOnSuccessListener(documentos -> {
                     List<Consulta> lista = new ArrayList<>();
+
                     for (QueryDocumentSnapshot doc : documentos) {
                         Consulta c = new Consulta(
                                 doc.getString("idPaciente"),
@@ -77,11 +86,19 @@ public class ConsultaDAO {
                                 doc.getDouble("altura") != null ? doc.getDouble("altura") : 0,
                                 doc.getString("observacoes")
                         );
+
                         c.setId(doc.getId());
                         lista.add(c);
                     }
+
                     callback.onSucesso(lista);
                 })
+                .addOnFailureListener(e -> callback.onErro(e.getMessage()));
+    }
+
+    public void ContarTodas(CallbackTotal callback) {
+        db.collection(COLECAO).get()
+                .addOnSuccessListener(documentos -> callback.onSucesso(documentos.size()))
                 .addOnFailureListener(e -> callback.onErro(e.getMessage()));
     }
 }
