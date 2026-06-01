@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "118522153712",
+    "project_id": "nutricionistaapp-32e07",
+    "storage_bucket": "nutricionistaapp-32e07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118522153712:android:ad7630ecd1de20843c9035",
+        "android_client_info": {
+          "package_name": "com.nutricionista.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeZbHCxMQ3VY7t7kcOJjX-TEfGPCKClqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="16dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Dados do Paciente" android:textSize="18sp" android:textStyle="bold"
+            android:textColor="#2E7D32" android:paddingBottom="12dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Nome completo" android:textColor="#555"/>
+        <EditText android:id="@+id/edtNome" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="Ex: Maria da Silva" android:inputType="textPersonName" android:layout_marginBottom="8dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Data de Nascimento" android:textColor="#555"/>
+        <EditText android:id="@+id/edtDataNascimento" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="DD/MM/AAAA" android:inputType="datetime" android:layout_marginBottom="8dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Telefone" android:textColor="#555"/>
+        <EditText android:id="@+id/edtTelefone" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="(00) 00000-0000" android:inputType="phone" android:layout_marginBottom="8dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Objetivo Nutricional" android:textColor="#555"/>
+        <EditText android:id="@+id/edtObjetivo" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="Ex: Perda de peso..." android:inputType="textMultiLine" android:minLines="2" android:layout_marginBottom="16dp"/>
+        <Button android:id="@+id/btnInserir" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Cadastrar Paciente" android:onClick="InserirClique" android:backgroundTint="#2E7D32" android:textColor="#FFFFFF" android:layout_marginBottom="4dp"/>
+        <Button android:id="@+id/btnAtualizar" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Atualizar" android:onClick="AtualizarClique" android:backgroundTint="#1565C0" android:textColor="#FFFFFF" android:layout_marginBottom="4dp"/>
+        <Button android:id="@+id/btnExcluir" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Excluir Paciente" android:onClick="ExcluirClique" android:backgroundTint="#C62828" android:textColor="#FFFFFF" android:layout_marginBottom="4dp"/>
+        <Button android:id="@+id/btnConsultas" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Ver Consultas" android:onClick="ConsultasClique" android:backgroundTint="#F57F17" android:textColor="#FFFFFF"/>
+    </LinearLayout>
+</ScrollView>

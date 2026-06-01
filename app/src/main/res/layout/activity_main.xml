@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="8dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Nutricionista App" android:textSize="22sp" android:textStyle="bold"
+        android:textColor="#2E7D32" android:padding="12dp" android:gravity="center"/>
+    <ListView android:id="@+id/lsvPacientes" android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="+ Novo Paciente" android:onClick="NovoClique"
+        android:backgroundTint="#2E7D32" android:textColor="#FFFFFF" android:layout_margin="4dp"/>
+</LinearLayout>
